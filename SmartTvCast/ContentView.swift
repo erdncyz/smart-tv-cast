@@ -31,6 +31,10 @@ struct ContentView: View {
         sender.devices.first { $0.id == sender.connectedDeviceID }
     }
 
+    private var selectedDevice: SmartTvDevice? {
+        sender.devices.first { $0.id == sender.selectedDeviceID }
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -45,8 +49,8 @@ struct ContentView: View {
                     VStack(spacing: 14) {
                         statusCard
 
-                        if let connectedDevice {
-                            connectedDeviceCard(connectedDevice)
+                        if let deviceForCard = connectedDevice ?? selectedDevice {
+                            connectedDeviceCard(deviceForCard)
                         }
 
                         tvListCard
@@ -91,6 +95,7 @@ struct ContentView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(todYellow)
+                    .disabled(sender.isInstallingApp)
 
                     Button {
                         sender.disconnect()
@@ -100,13 +105,21 @@ struct ContentView: View {
                     }
                     .buttonStyle(.bordered)
                     .tint(todCyan)
-                    .disabled(!sender.isConnected)
+                    .disabled(!sender.isConnected || sender.isInstallingApp)
                 }
 
                 HStack {
                     statusBadge(title: "Bulunan TV", value: "\(sender.devices.count)")
                     statusBadge(title: "Bağlantı", value: sender.isConnected ? "Bağlı" : "Pasif")
                     statusBadge(title: "Seçili", value: sender.selectedDeviceID == nil ? "-" : "Var")
+                }
+
+                if sender.isInstallingApp {
+                    HStack(spacing: 8) {
+                        ProgressView()
+                        Text("TV market/yükleme akışı başlatılıyor...")
+                            .font(.caption)
+                    }
                 }
             }
         }
@@ -180,14 +193,27 @@ struct ContentView: View {
                     Label("Bağlı Cihaz", systemImage: "tv.and.hifispeaker.fill")
                         .font(.headline)
                     Spacer()
-                    Text("Aktif")
+                    Text(sender.connectedDeviceID == device.id ? "Aktif" : "Hazır")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(todYellow)
+                        .foregroundStyle(sender.connectedDeviceID == device.id ? todYellow : todCyan)
                 }
                 deviceDetailRow("Ad", device.name)
                 deviceDetailRow("ID", device.id)
                 deviceDetailRow("Tür", device.type)
                 deviceDetailRow("URI", device.uri)
+
+                if !sender.deviceLogText.isEmpty {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Cihaz Logu")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                        Text(sender.deviceLogText)
+                            .font(.caption)
+                            .foregroundStyle(todYellow)
+                    }
+                    .padding(10)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(todDark.opacity(0.85)))
+                }
             }
         }
     }

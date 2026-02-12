@@ -37,6 +37,8 @@ final class SmartViewSenderManager: NSObject, ObservableObject {
     @Published var lastError = ""
     @Published var isSearching = false
     @Published var isConnected = false
+    @Published var isInstallingApp = false
+    @Published var deviceLogText = ""
     @Published var connectedDeviceID: String?
     @Published var selectedDeviceID: String?
     @Published var deepLinkText = "tod://home"
@@ -51,6 +53,7 @@ final class SmartViewSenderManager: NSObject, ObservableObject {
     private var application: Application?
     private var pendingDeepLinkURL: String?
     private var permissionBrowser: NWBrowser?
+    private var installAttemptedDeviceIDs: Set<String> = []
 #endif
 
     override init() {
@@ -126,6 +129,7 @@ final class SmartViewSenderManager: NSObject, ObservableObject {
         selectedDeviceID = device.id
         statusText = "\(device.name) baglanıyor..."
         lastError = ""
+        deviceLogText = "\(device.name): uygulama kontrol ediliyor..."
 
         let appID = Self.receiverAppID as AnyObject
         guard let app = service.createApplication(appID, channelURI: Self.channelID, args: nil) else {
@@ -142,14 +146,24 @@ final class SmartViewSenderManager: NSObject, ObservableObject {
             Task { @MainActor in
                 if client != nil {
                     self.isConnected = true
+                    self.isInstallingApp = false
                     self.connectedDeviceID = device.id
+                    self.installAttemptedDeviceIDs.remove(device.id)
                     self.statusText = "\(device.name) baglandi"
+                    self.deviceLogText = "\(device.name): uygulama yuklu, baglanti kuruldu"
                     self.flushPendingDeepLinkIfNeeded()
                 } else {
                     self.isConnected = false
                     self.connectedDeviceID = nil
-                    self.statusText = "Baglanti hatasi"
-                    self.lastError = error?.localizedDescription ?? "Bilinmeyen baglanti hatasi"
+                    let nsError = error as NSError?
+                    if self.shouldAttemptInstall(for: nsError, deviceID: device.id) {
+                        self.installAttemptedDeviceIDs.insert(device.id)
+                        self.tryInstallReceiverApp(on: app, device: device)
+                    } else {
+                        self.statusText = "Baglanti hatasi"
+                        self.lastError = nsError?.localizedDescription ?? "Bilinmeyen baglanti hatasi"
+                        self.deviceLogText = "\(device.name): \(self.lastError)"
+                    }
                 }
             }
         }
@@ -246,6 +260,40 @@ final class SmartViewSenderManager: NSObject, ObservableObject {
             Task { @MainActor in
                 self?.permissionBrowser?.cancel()
                 self?.permissionBrowser = nil
+            }
+        }
+    }
+
+    private func shouldAttemptInstall(for error: NSError?, deviceID: String) -> Bool {
+        guard !installAttemptedDeviceIDs.contains(deviceID) else { return false }
+        guard let error else { return false }
+
+        let lower = error.localizedDescription.lowercased()
+        return lower.contains("not installed")
+            || lower.contains("app is not installed")
+            || lower.contains("application not found")
+            || lower.contains("not found")
+    }
+
+    private func tryInstallReceiverApp(on app: Application, device: SmartTvDevice) {
+        isInstallingApp = true
+        statusText = "\(device.name): TV'de uygulama yüklü değil, markete yönlendiriliyor..."
+        deviceLogText = "\(device.name): uygulama yuklu degil, markete yonlendiriliyor..."
+        lastError = ""
+
+        app.install { [weak self] success, error in
+            guard let self else { return }
+            Task { @MainActor in
+                self.isInstallingApp = false
+                if success {
+                    self.statusText = "\(device.name): market/yukleme acildi. TV'den onaylayin."
+                    self.deviceLogText = "\(device.name): market/yukleme acildi"
+                    self.lastError = ""
+                } else {
+                    self.statusText = "\(device.name): markete yonlendirme basarisiz"
+                    self.lastError = error?.localizedDescription ?? "Yukleme baslatilamadi"
+                    self.deviceLogText = "\(device.name): \(self.lastError)"
+                }
             }
         }
     }
