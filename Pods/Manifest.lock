@@ -1,0 +1,16 @@
+PODS:
+  - smart-view-sdk (3.1)
+
+DEPENDENCIES:
+  - smart-view-sdk
+
+SPEC REPOS:
+  trunk:
+    - smart-view-sdk
+
+SPEC CHECKSUMS:
+  smart-view-sdk: 5cbeba9e10e144b9475306cb2bfa8cec97c6a97d
+
+PODFILE CHECKSUM: d74c230169720162c7fcae514dd12e1e77ac4e8b
+
+COCOAPODS: 1.16.2

@@ -1,0 +1,512 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		1D1FD38AB9A3C9FCA58DE4F982C99DBC /* smart-view-sdk */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = CC516F66571DBFFE24A2351CE051EC44 /* Build configuration list for PBXAggregateTarget "smart-view-sdk" */;
+			buildPhases = (
+				1733E23A0A33E4F496BFFEBDB0B4A44C /* [CP] Copy dSYMs */,
+				15D6F7F194B2068A7057C7735BD07DC9 /* [CP] Copy XCFrameworks */,
+			);
+			dependencies = (
+			);
+			name = "smart-view-sdk";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		6937BF62B84D8536C649CED492593ED5 /* Pods-SmartTvCast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C6D4BA806CB60318463A74ECA40108 /* Pods-SmartTvCast-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		855BB47D6D07C5E578599AAA4AD288BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D1FD38AB9A3C9FCA58DE4F982C99DBC;
+			remoteInfo = "smart-view-sdk";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		05E2B3E350EFB8EC6E466ABED73BA139 /* Pods-SmartTvCast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SmartTvCast.release.xcconfig"; sourceTree = "<group>"; };
+		0C3BC6F314E364F29888425A8492AA09 /* smart-view-sdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "smart-view-sdk.release.xcconfig"; sourceTree = "<group>"; };
+		2691CF980BC55385123684FC38E5FF59 /* Pods-SmartTvCast-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SmartTvCast-frameworks.sh"; sourceTree = "<group>"; };
+		31D61C63AE43BCEE8A4536CE78C28D44 /* smart-view-sdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "smart-view-sdk.debug.xcconfig"; sourceTree = "<group>"; };
+		45737B203639E65FB90A5190537FE21B /* Pods-SmartTvCast */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "Pods-SmartTvCast"; path = "libPods-SmartTvCast.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		56C6D4BA806CB60318463A74ECA40108 /* Pods-SmartTvCast-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SmartTvCast-dummy.m"; sourceTree = "<group>"; };
+		934BED2DDD9DCB48E315440C6F67673D /* SmartView.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = SmartView.xcframework; path = "SmartViewSDK-iOS-Xcode13-3.1/SmartViewSDK-iOS/SmartView.xcframework"; sourceTree = "<group>"; };
+		95D61A4C6B1D4BEA313882467335E5BA /* smart-view-sdk-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "smart-view-sdk-xcframeworks.sh"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		D98EC95FDF0F13D46D4FDF61D1008911 /* Pods-SmartTvCast-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SmartTvCast-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E6A7AD65634BC2F76A4B528B718577F0 /* smart-view-sdk-copy-dsyms.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "smart-view-sdk-copy-dsyms.sh"; sourceTree = "<group>"; };
+		F6F7C6D5FD261DD0F18922B72E6E1A20 /* Pods-SmartTvCast-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SmartTvCast-acknowledgements.plist"; sourceTree = "<group>"; };
+		FF4DB342EFE5546C2954E22CC3C34162 /* Pods-SmartTvCast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SmartTvCast.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A84A8C357D9306D503CCDA2D9F18C09A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0A75D70E9532B552FAC74794BDC30285 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FCB69ADFA0F5CB58F3EF0AE6AE82934E /* Pods-SmartTvCast */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		243FEF10631EAD5BA804EB1FF8217BD5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45737B203639E65FB90A5190537FE21B /* Pods-SmartTvCast */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3ADC6BDFB21BD8BCDC75A0105AC2F192 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E7BA5B57D60F80A1961158D27B21DDC4 /* smart-view-sdk */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9EA72A3022B3B52F81794A99AAF6D7FF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E6A7AD65634BC2F76A4B528B718577F0 /* smart-view-sdk-copy-dsyms.sh */,
+				95D61A4C6B1D4BEA313882467335E5BA /* smart-view-sdk-xcframeworks.sh */,
+				31D61C63AE43BCEE8A4536CE78C28D44 /* smart-view-sdk.debug.xcconfig */,
+				0C3BC6F314E364F29888425A8492AA09 /* smart-view-sdk.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/smart-view-sdk";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				3ADC6BDFB21BD8BCDC75A0105AC2F192 /* Pods */,
+				243FEF10631EAD5BA804EB1FF8217BD5 /* Products */,
+				0A75D70E9532B552FAC74794BDC30285 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E7BA5B57D60F80A1961158D27B21DDC4 /* smart-view-sdk */ = {
+			isa = PBXGroup;
+			children = (
+				F43968C12806F9E94B02CBDA7A86F94C /* Frameworks */,
+				9EA72A3022B3B52F81794A99AAF6D7FF /* Support Files */,
+			);
+			name = "smart-view-sdk";
+			path = "smart-view-sdk";
+			sourceTree = "<group>";
+		};
+		F43968C12806F9E94B02CBDA7A86F94C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				934BED2DDD9DCB48E315440C6F67673D /* SmartView.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCB69ADFA0F5CB58F3EF0AE6AE82934E /* Pods-SmartTvCast */ = {
+			isa = PBXGroup;
+			children = (
+				D98EC95FDF0F13D46D4FDF61D1008911 /* Pods-SmartTvCast-acknowledgements.markdown */,
+				F6F7C6D5FD261DD0F18922B72E6E1A20 /* Pods-SmartTvCast-acknowledgements.plist */,
+				56C6D4BA806CB60318463A74ECA40108 /* Pods-SmartTvCast-dummy.m */,
+				2691CF980BC55385123684FC38E5FF59 /* Pods-SmartTvCast-frameworks.sh */,
+				FF4DB342EFE5546C2954E22CC3C34162 /* Pods-SmartTvCast.debug.xcconfig */,
+				05E2B3E350EFB8EC6E466ABED73BA139 /* Pods-SmartTvCast.release.xcconfig */,
+			);
+			name = "Pods-SmartTvCast";
+			path = "Target Support Files/Pods-SmartTvCast";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DFB91F1C79CB50603E5323A8E6B164D9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5E8F03EA4ABD82F24EB7D745A5EBC322 /* Pods-SmartTvCast */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 928350FD8B1638A71440117C14DCD7E9 /* Build configuration list for PBXNativeTarget "Pods-SmartTvCast" */;
+			buildPhases = (
+				DFB91F1C79CB50603E5323A8E6B164D9 /* Headers */,
+				0E9B9B8DB5492F624B720D2C9F9E804F /* Sources */,
+				A84A8C357D9306D503CCDA2D9F18C09A /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F0C7C58ACED76071FE56648DBFC16754 /* PBXTargetDependency */,
+			);
+			name = "Pods-SmartTvCast";
+			productName = "Pods-SmartTvCast";
+			productReference = 45737B203639E65FB90A5190537FE21B /* Pods-SmartTvCast */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			minimizedProjectReferenceProxies = 0;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 243FEF10631EAD5BA804EB1FF8217BD5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5E8F03EA4ABD82F24EB7D745A5EBC322 /* Pods-SmartTvCast */,
+				1D1FD38AB9A3C9FCA58DE4F982C99DBC /* smart-view-sdk */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		15D6F7F194B2068A7057C7735BD07DC9 /* [CP] Copy XCFrameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/smart-view-sdk/smart-view-sdk-xcframeworks-input-files.xcfilelist",
+			);
+			name = "[CP] Copy XCFrameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/smart-view-sdk/smart-view-sdk-xcframeworks-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/smart-view-sdk/smart-view-sdk-xcframeworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1733E23A0A33E4F496BFFEBDB0B4A44C /* [CP] Copy dSYMs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/smart-view-sdk/smart-view-sdk-copy-dsyms-input-files.xcfilelist",
+			);
+			name = "[CP] Copy dSYMs";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/smart-view-sdk/smart-view-sdk-copy-dsyms-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/smart-view-sdk/smart-view-sdk-copy-dsyms.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0E9B9B8DB5492F624B720D2C9F9E804F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6937BF62B84D8536C649CED492593ED5 /* Pods-SmartTvCast-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F0C7C58ACED76071FE56648DBFC16754 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "smart-view-sdk";
+			target = 1D1FD38AB9A3C9FCA58DE4F982C99DBC /* smart-view-sdk */;
+			targetProxy = 855BB47D6D07C5E578599AAA4AD288BB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0FACBB877DA4F88CD7E864DF3F3500C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31D61C63AE43BCEE8A4536CE78C28D44 /* smart-view-sdk.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		57099A56EA5FEBE8299C006363ABB0A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05E2B3E350EFB8EC6E466ABED73BA139 /* Pods-SmartTvCast.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		73B52DF4F6FB250F5C3553496F221884 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C3BC6F314E364F29888425A8492AA09 /* smart-view-sdk.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8DE5143C03248BB6CD542DE3963D6F3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		9E406C6AAF85E580207CD97B0044DEAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		DAAD34FA16E30B05475D7107925FE719 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF4DB342EFE5546C2954E22CC3C34162 /* Pods-SmartTvCast.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DE5143C03248BB6CD542DE3963D6F3A /* Debug */,
+				9E406C6AAF85E580207CD97B0044DEAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		928350FD8B1638A71440117C14DCD7E9 /* Build configuration list for PBXNativeTarget "Pods-SmartTvCast" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAAD34FA16E30B05475D7107925FE719 /* Debug */,
+				57099A56EA5FEBE8299C006363ABB0A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC516F66571DBFFE24A2351CE051EC44 /* Build configuration list for PBXAggregateTarget "smart-view-sdk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0FACBB877DA4F88CD7E864DF3F3500C1 /* Debug */,
+				73B52DF4F6FB250F5C3553496F221884 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}
