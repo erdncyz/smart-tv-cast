@@ -1,0 +1,18 @@
+# IDE
+.idea/
+*.iml
+
+# Gradle
+.gradle/
+local.properties
+
+# Build outputs
+build/
+app/build/
+
+# Android artifacts
+*.apk
+*.aab
+
+# Smart View SDK binary (add manually)
+app/libs/*.jar
