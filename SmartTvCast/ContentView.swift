@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var sender = SmartViewSenderManager()
+    @State private var emptyInputText = ""
+    @State private var customActionText = "customInput"
     private let todYellow = Color(red: 1.00, green: 0.84, blue: 0.05)
     private let todCyan = Color(red: 0.02, green: 0.76, blue: 0.96)
     private let todDark = Color(red: 0.04, green: 0.05, blue: 0.10)
@@ -55,8 +57,10 @@ struct ContentView: View {
 
                         tvListCard
                         deepLinkCard
-                        remoteCard
+                        playContentCard
+                        customInputCard
                         debugStatusCard
+                        sentLogsCard
                     }
                     .padding(.horizontal, 14)
                     .padding(.vertical, 12)
@@ -257,78 +261,102 @@ struct ContentView: View {
         }
     }
 
-    private var remoteCard: some View {
+    private var playContentCard: some View {
         card {
             VStack(alignment: .leading, spacing: 10) {
-                Text("Kumanda")
+                Text("Play Content")
                     .font(.headline)
 
-                VStack(spacing: 10) {
-                    Button {
-                        sender.sendCommand(action: "up")
-                    } label: {
-                        Image(systemName: "arrow.up")
-                            .frame(maxWidth: .infinity)
+                TextField("contentId (orn: 3194)", text: $sender.playContentID)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .padding(10)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.white.opacity(0.65)))
+
+                TextField("streamType (orn: live)", text: $sender.playStreamType)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .padding(10)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.white.opacity(0.65)))
+
+                HStack(spacing: 8) {
+                    Button("Live 3194") {
+                        sender.playContentID = "3194"
+                        sender.playStreamType = "live"
+                        sender.sendPlayContent()
                     }
-                    .buttonStyle(.borderedProminent)
-                    .tint(todYellow)
-                    .disabled(!sender.isConnected)
+                    .buttonStyle(.bordered)
+                    .tint(todCyan)
 
-                    HStack(spacing: 10) {
-                        Button {
-                            sender.sendCommand(action: "left")
-                        } label: {
-                            Image(systemName: "arrow.left")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .tint(todYellow)
-                        .disabled(!sender.isConnected)
-
-                        Button("OK") {
-                            sender.sendCommand(action: "select")
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .tint(todYellow)
-                        .disabled(!sender.isConnected)
-
-                        Button {
-                            sender.sendCommand(action: "right")
-                        } label: {
-                            Image(systemName: "arrow.right")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .tint(todYellow)
-                        .disabled(!sender.isConnected)
+                    Button("VOD Movie") {
+                        sender.playContentID = "PT0000465711"
+                        sender.playStreamType = "movie"
+                        sender.sendPlayContent()
                     }
+                    .buttonStyle(.bordered)
+                    .tint(todCyan)
 
-                    Button {
-                        sender.sendCommand(action: "down")
-                    } label: {
-                        Image(systemName: "arrow.down")
-                            .frame(maxWidth: .infinity)
+                    Button("Series Stream") {
+                        sender.playContentID = "PZ0000008346"
+                        sender.playStreamType = "series"
+                        sender.sendPlayContent()
                     }
-                    .buttonStyle(.borderedProminent)
-                    .tint(todYellow)
-                    .disabled(!sender.isConnected)
-
-                    HStack(spacing: 10) {
-                        Button("Back") {
-                            sender.sendCommand(action: "back")
-                        }
-                        .buttonStyle(.bordered)
-                        .tint(todCyan)
-                        .disabled(!sender.isConnected)
-
-                        Button("Home") {
-                            sender.sendCommand(action: "home")
-                        }
-                        .buttonStyle(.bordered)
-                        .tint(todCyan)
-                        .disabled(!sender.isConnected)
-                    }
+                    .buttonStyle(.bordered)
+                    .tint(todCyan)
                 }
+
+                Button {
+                    sender.sendPlayContent()
+                } label: {
+                    Label("PlayContent Gonder", systemImage: "play.circle.fill")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(todYellow)
+                .disabled(
+                    sender.playContentID.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
+                    sender.playStreamType.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                )
+            }
+        }
+    }
+
+    private var customInputCard: some View {
+        card {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Custom Input")
+                    .font(.headline)
+
+                TextField("action", text: $customActionText)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .padding(10)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.white.opacity(0.65)))
+
+                TextField("payload", text: $emptyInputText)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .padding(10)
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.white.opacity(0.65)))
+
+                Button {
+                    let action = customActionText.trimmingCharacters(in: .whitespacesAndNewlines)
+                    let value = emptyInputText.trimmingCharacters(in: .whitespacesAndNewlines)
+                    if value.isEmpty {
+                        sender.sendCommand(action: action)
+                    } else {
+                        sender.sendCommand(action: action, payload: ["value": value])
+                    }
+                } label: {
+                    Label("Send", systemImage: "paperplane.fill")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(todYellow)
+                .disabled(
+                    !sender.isConnected ||
+                    customActionText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                )
             }
         }
     }
@@ -344,6 +372,63 @@ struct ContentView: View {
                     Text(sender.lastError)
                         .font(.footnote)
                         .foregroundStyle(.red)
+                }
+                if !sender.receivedTVLogs.isEmpty {
+                    Divider()
+                        .overlay(.white.opacity(0.15))
+                    HStack {
+                        Text("TV Mesaj Logları")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        Button("Logları Temizle") {
+                            sender.clearReceivedTVLogs()
+                        }
+                        .buttonStyle(.bordered)
+                        .tint(todCyan)
+                    }
+                    ForEach(Array(sender.receivedTVLogs.enumerated().reversed()), id: \.offset) { _, log in
+                        Text(log)
+                            .font(.caption2)
+                            .foregroundStyle(.white.opacity(0.9))
+                            .textSelection(.enabled)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, 2)
+                    }
+                }
+            }
+        }
+    }
+
+    private var sentLogsCard: some View {
+        card {
+            VStack(alignment: .leading, spacing: 6) {
+                HStack {
+                    Text("Gonderilen Mesajlar")
+                        .font(.headline)
+                    Spacer()
+                    if !sender.sentLogs.isEmpty {
+                        Button("Logları Temizle") {
+                            sender.clearSentLogs()
+                        }
+                        .buttonStyle(.bordered)
+                        .tint(todCyan)
+                    }
+                }
+
+                if sender.sentLogs.isEmpty {
+                    Text("Henuz gonderilen mesaj yok.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(Array(sender.sentLogs.enumerated().reversed()), id: \.offset) { _, log in
+                        Text(log)
+                            .font(.caption2)
+                            .foregroundStyle(.white.opacity(0.9))
+                            .textSelection(.enabled)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, 2)
+                    }
                 }
             }
         }

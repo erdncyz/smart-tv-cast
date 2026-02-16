@@ -39,9 +39,13 @@ final class SmartViewSenderManager: NSObject, ObservableObject {
     @Published var isConnected = false
     @Published var isInstallingApp = false
     @Published var deviceLogText = ""
+    @Published var receivedTVLogs: [String] = []
+    @Published var sentLogs: [String] = []
     @Published var connectedDeviceID: String?
     @Published var selectedDeviceID: String?
     @Published var deepLinkText = "tod://home"
+    @Published var playContentID = "PT0000465711"
+    @Published var playStreamType = "movie"
 
     var canUseSDK: Bool {
         smartViewSDKLinked
@@ -52,6 +56,7 @@ final class SmartViewSenderManager: NSObject, ObservableObject {
     private var servicesByID: [String: Service] = [:]
     private var application: Application?
     private var pendingDeepLinkURL: String?
+    private var pendingPlayContent: (contentID: String, streamType: String)?
     private var permissionBrowser: NWBrowser?
     private var installAttemptedDeviceIDs: Set<String> = []
 #endif
@@ -152,6 +157,7 @@ final class SmartViewSenderManager: NSObject, ObservableObject {
                     self.statusText = "\(device.name) baglandi"
                     self.deviceLogText = "\(device.name): uygulama yuklu, baglanti kuruldu"
                     self.flushPendingDeepLinkIfNeeded()
+                    self.flushPendingPlayContentIfNeeded()
                 } else {
                     self.isConnected = false
                     self.connectedDeviceID = nil
@@ -222,8 +228,61 @@ final class SmartViewSenderManager: NSObject, ObservableObject {
         }
 
         app.publish(event: "command", message: message as AnyObject)
+        appendSentLog("event=command action=\(action) payload=\(String(describing: payload ?? [:]))")
         statusText = "Komut gonderildi: \(action)"
         lastError = ""
+#endif
+    }
+
+    func clearReceivedTVLogs() {
+        receivedTVLogs.removeAll()
+    }
+
+    func clearSentLogs() {
+        sentLogs.removeAll()
+    }
+
+    func sendPlayContent() {
+        guard canUseSDK else { return }
+
+        let contentID = playContentID.trimmingCharacters(in: .whitespacesAndNewlines)
+        let streamType = playStreamType.trimmingCharacters(in: .whitespacesAndNewlines)
+        print("[SmartView][iOS] sendPlayContent requested contentId=\(contentID) streamType=\(streamType)")
+
+        guard !contentID.isEmpty else {
+            lastError = "contentId bos olamaz."
+            deviceLogText = "PlayContent hatasi: contentId bos"
+            print("[SmartView][iOS] sendPlayContent failed: contentId is empty")
+            return
+        }
+
+        guard !streamType.isEmpty else {
+            lastError = "streamType bos olamaz."
+            deviceLogText = "PlayContent hatasi: streamType bos"
+            print("[SmartView][iOS] sendPlayContent failed: streamType is empty")
+            return
+        }
+
+#if canImport(SmartView) || canImport(SmartViewSDK)
+        if let app = application, app.isConnected {
+            deviceLogText = "PlayContent gonderiliyor: \(contentID) (\(streamType))"
+            print("[SmartView][iOS] sendPlayContent publishing immediately")
+            publishPlayContent(contentID: contentID, streamType: streamType, with: app)
+            return
+        }
+
+        guard let selectedDeviceID,
+              let selectedDevice = devices.first(where: { $0.id == selectedDeviceID }) else {
+            lastError = "Lutfen once bir TV secin."
+            deviceLogText = "PlayContent hatasi: secili TV yok"
+            print("[SmartView][iOS] sendPlayContent failed: no selected TV")
+            return
+        }
+
+        pendingPlayContent = (contentID: contentID, streamType: streamType)
+        deviceLogText = "PlayContent kuyruga alindi: \(contentID) (\(streamType))"
+        print("[SmartView][iOS] sendPlayContent queued and connecting to device id=\(selectedDevice.id)")
+        connect(to: selectedDevice)
 #endif
     }
 
@@ -301,7 +360,21 @@ final class SmartViewSenderManager: NSObject, ObservableObject {
     private func publishDeepLink(_ url: String, with app: Application) {
         let payload: [String: String] = ["url": url]
         app.publish(event: "deepLink", message: payload as AnyObject)
+        appendSentLog("event=deepLink payload=\(payload)")
         statusText = "Deep link gonderildi"
+        lastError = ""
+    }
+
+    private func publishPlayContent(contentID: String, streamType: String, with app: Application) {
+        let payload: [String: String] = [
+            "contentId": contentID,
+            "streamType": streamType
+        ]
+        print("[SmartView][iOS] publish event=playContent payload=\(payload)")
+        app.publish(event: "playContent", message: payload as AnyObject)
+        appendSentLog("event=playContent payload=\(payload)")
+        statusText = "PlayContent gonderildi: \(contentID) (\(streamType))"
+        deviceLogText = "PlayContent gonderildi: \(contentID) (\(streamType))"
         lastError = ""
     }
 
@@ -313,12 +386,45 @@ final class SmartViewSenderManager: NSObject, ObservableObject {
         publishDeepLink(pendingDeepLinkURL, with: app)
     }
 
+    private func flushPendingPlayContentIfNeeded() {
+        guard let pendingPlayContent,
+              let app = application,
+              app.isConnected else { return }
+        print("[SmartView][iOS] flushing pending playContent contentId=\(pendingPlayContent.contentID) streamType=\(pendingPlayContent.streamType)")
+        self.pendingPlayContent = nil
+        publishPlayContent(
+            contentID: pendingPlayContent.contentID,
+            streamType: pendingPlayContent.streamType,
+            with: app
+        )
+    }
+
     private func reloadDeviceList() {
         devices = servicesByID.values
             .map { SmartTvDevice(id: $0.id, name: $0.name, uri: $0.uri, type: $0.type) }
             .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
         if selectedDeviceID == nil, let first = devices.first {
             selectedDeviceID = first.id
+        }
+    }
+
+    private func appendIncomingTVLog(_ text: String) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        let stamped = "[\(formatter.string(from: Date()))] \(text)"
+        receivedTVLogs.append(stamped)
+        if receivedTVLogs.count > 200 {
+            receivedTVLogs.removeFirst(receivedTVLogs.count - 200)
+        }
+    }
+
+    private func appendSentLog(_ text: String) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        let stamped = "[\(formatter.string(from: Date()))] \(text)"
+        sentLogs.append(stamped)
+        if sentLogs.count > 200 {
+            sentLogs.removeFirst(sentLogs.count - 200)
         }
     }
 #endif
@@ -377,6 +483,15 @@ extension SmartViewSenderManager: ChannelDelegate {
     func onMessage(_ message: Message) {
         let eventName = message.event ?? "unknown"
         statusText = "TV'den mesaj alindi: \(eventName)"
+        let fromID = message.from ?? "unknown"
+        let dataText = message.data.map { String(describing: $0) } ?? "nil"
+        appendIncomingTVLog("event=\(eventName) from=\(fromID) data=\(dataText)")
+    }
+
+    func onData(_ message: Message, payload: Data) {
+        let eventName = message.event ?? "binary"
+        let fromID = message.from ?? "unknown"
+        appendIncomingTVLog("binary event=\(eventName) from=\(fromID) bytes=\(payload.count)")
     }
 
     func onError(_ error: NSError) {
